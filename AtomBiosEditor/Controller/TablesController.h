@@ -23,7 +23,7 @@
     @property (weak) IBOutlet NSButton *radioDecimal;
     @property (weak) IBOutlet NSBox    *tableBox;
 
-    -(void) ReloadTableView: (short)type : (NSControlStateValue)HexOrDecIsEnabled;
+    -(void) ReloadTableView: (short)type : (NSCellStateValue)HexOrDecIsEnabled;
     -(void)InitTableTabInfo : (struct ATOM_DATA_AND_CMMD_TABLES *)atmtable : (char *)fileName : (struct FIRMWARE_INFO*) fwd : (struct POWERPLAY_DATA*) ppd;
 
 @end

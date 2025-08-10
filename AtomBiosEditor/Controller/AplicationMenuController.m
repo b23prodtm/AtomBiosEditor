@@ -128,7 +128,7 @@
                     fclose(self->atomBios.firmware.file);
                 } else {
                     if ( self->atomBios.firmware.genType != 2) {
-                        [self DisplayAlert : @"Unsupported Firmware Generation!" : @"This firmware generation is not supported by this program." : 1];
+                        [self DisplayAlert : @"Unsupported Firmware Generation!" : [NSString stringWithFormat: @"This firmware generation is not supported by this program.(GenType = %hu)", self->atomBios.firmware.genType] : 1];
                     }
                     
                     NSUInteger windowStyleMask = NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable;

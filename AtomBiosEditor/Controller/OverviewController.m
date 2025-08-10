@@ -19,7 +19,7 @@
 
     - (void) initOverviewInfo: (struct ATOM_BIOS *)atomBios {
         atombios = atomBios;
-        [_radioDecimal setState : NSControlStateValueOn];
+        [_radioDecimal setState : NSOnState];
         //Table Initialization
         tableView = [[OverviewTable alloc] initWithFrame: NSMakeRect(0, 0, 440, 380)];
         [tableView initTableStructure];
@@ -35,14 +35,14 @@
 
     - (IBAction)RadioHexChanged:(id)sender {
         if (_radioHexadecimal.state) {
-            [_radioDecimal setState:NSControlStateValueOff];
+            [_radioDecimal setState:NSOnState];
             [tableView reloadData : atombios : true];
         }
     }
 
     - (IBAction)RadioDecChanged:(id)sender {
         if (_radioDecimal.state) {
-            [_radioHexadecimal setState:NSControlStateValueOff];
+            [_radioHexadecimal setState:NSOffState];
             [tableView reloadData : atombios : false];
         }
     }

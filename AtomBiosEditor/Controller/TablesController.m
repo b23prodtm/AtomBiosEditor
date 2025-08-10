@@ -21,7 +21,7 @@
     -(void)viewDidLoad {
         [super viewDidLoad]; 
         
-        [_radioDecimal setState : NSControlStateValueOn];
+        [_radioDecimal setState : NSOnState];
         stringFormat = [NSArray arrayWithObjects: @"%d",@"%02X", nil];
         // Selector Object Configuration
         NSArray * tablesSelectorList = [NSArray arrayWithObjects:@"select..",@"Data Tables",@"Command Tables", nil];
@@ -51,7 +51,7 @@
         [_selectorTable      setEnabled : YES];
     }
 
-    -(void) ReloadTableView: (short)tableType : (NSControlStateValue)viewMode {
+    -(void) ReloadTableView: (short)tableType : (NSCellStateValue)viewMode {
         [_radioDecimal     setEnabled : YES];
         [_radioHexadecimal setEnabled : YES];
         switch (tableType) {
@@ -79,17 +79,17 @@
         [tableView setContentRev: [[NSMutableArray alloc] initWithCapacity: rows]];
         for (int a=aInitial; a<aFinal; a++) {
             [[tableView tableName]  addObject: [NSString stringWithUTF8String: dataAndCmmdTables[a].tableName]];
-            [[tableView tableIndex] addObject: [NSString stringWithFormat: stringFormat[viewMode], dataAndCmmdTables[a].index ]];
+            [[tableView tableIndex] addObject: [NSString stringWithFormat: @"%hu", dataAndCmmdTables[a].index ]];
             if (dataAndCmmdTables[a].offset == 0) {
                 [[tableView offset]     addObject: [NSString stringWithFormat: @""]];
                 [[tableView size]       addObject: [NSString stringWithFormat: @""]];
                 [[tableView formatRev]  addObject: [NSString stringWithFormat: @""]];
                 [[tableView contentRev] addObject: [NSString stringWithFormat: @""]];
             } else {
-                [[tableView formatRev]  addObject: [NSString stringWithFormat: stringFormat[viewMode], dataAndCmmdTables[a].formatRev ]];
-                [[tableView contentRev] addObject: [NSString stringWithFormat: stringFormat[viewMode], dataAndCmmdTables[a].contentRev]];
-                [[tableView offset]     addObject: [NSString stringWithFormat: stringFormat[viewMode], dataAndCmmdTables[a].offset]];
-                [[tableView size]       addObject: [NSString stringWithFormat: stringFormat[viewMode], dataAndCmmdTables[a].size  ]];
+                [[tableView formatRev]  addObject: [NSString stringWithFormat: @"%hu", dataAndCmmdTables[a].formatRev ]];
+                [[tableView contentRev] addObject: [NSString stringWithFormat: @"%hu", dataAndCmmdTables[a].contentRev]];
+                [[tableView offset]     addObject: [NSString stringWithFormat: @"%hu", dataAndCmmdTables[a].offset]];
+                [[tableView size]       addObject: [NSString stringWithFormat: @"%hu", dataAndCmmdTables[a].size  ]];
             }
         }
         [tableView reloadData];
@@ -158,13 +158,13 @@
 
     - (IBAction)RadioHexChanged:(id)sender {
         if (_radioHexadecimal.state) {
-            [_radioDecimal setState:NSControlStateValueOff];
+            [_radioDecimal setState:NSOffState];
             [self ReloadTableView: self.selectorTable.indexOfSelectedItem : _radioHexadecimal.state];
         }
     }
     - (IBAction)RadioDecChanged:(id)sender {
         if (_radioDecimal.state) {
-            [_radioHexadecimal setState:NSControlStateValueOff];
+            [_radioHexadecimal setState:NSOffState];
             [self ReloadTableView: self.selectorTable.indexOfSelectedItem : _radioHexadecimal.state];
         }
     }

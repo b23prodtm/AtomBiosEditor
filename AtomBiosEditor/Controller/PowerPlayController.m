@@ -18,7 +18,7 @@
     -(void)viewDidLoad {
         [super viewDidLoad];
         stringFormat = [NSArray arrayWithObjects: @"%d",@"%02X", nil];
-        [_radioDecimal setState: NSControlStateValueOn];
+        [_radioDecimal setState: NSOnState];
         [_radioDecimal     setEnabled : YES];
         [_radioHexadecimal setEnabled : YES];
     }
@@ -80,14 +80,14 @@
 
     - (IBAction)RadioHexChanged:(id)sender {
         if (_radioHexadecimal.state) {
-            [_radioDecimal setState:NSControlStateValueOff];
+            [_radioDecimal setState:NSOffState];
             [self InitPowerPlayInfo : dcTable : &(pPlay) : 1];
         }
     }
 
     - (IBAction)RadioDecChanged:(id)sender {
         if (_radioDecimal.state) {
-            [_radioHexadecimal setState:NSControlStateValueOff];
+            [_radioHexadecimal setState:NSOffState];
             [self InitPowerPlayInfo : dcTable : &(pPlay) : 0];
         }
     }
